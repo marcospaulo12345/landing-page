@@ -1,5 +1,5 @@
 import { Base } from '../Base';
-import { mockBase } from '../Base/stories';
+import { mockBase } from '../Base/mock';
 import * as Styled from './styles';
 
 function Home() {
