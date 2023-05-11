@@ -22,11 +22,17 @@ export const mapSections = (sections = []) => {
 };
 
 export const mapSectionTwoColumns = (section = {}) => {
+  // console.log(section);
   const {
     __component: component = '',
     title = '',
     description: text = '',
-    image: { url: srcImage = '' } = '',
+    // image: { url: srcImage = '' } = '',
+    image: {
+      data: {
+        attributes: { url: srcImage = '' },
+      },
+    } = '',
     metadata: { background = false, section_id: sectionId = '' } = false,
   } = section;
 

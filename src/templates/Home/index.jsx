@@ -22,10 +22,12 @@ function Home() {
       try {
         const data = await fetch('http://localhost:1337/api/pages/?slug=landing-page&populate=deep');
         const json = await data.json();
+        console.log(data);
         const { attributes } = json.data[0];
         const pageData = mapData([attributes]);
         setData(() => pageData[0]);
       } catch (e) {
+        console.log(e);
         setData(undefined);
       }
     };
