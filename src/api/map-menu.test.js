@@ -11,33 +11,38 @@ describe('map-menu', () => {
 
   it('should map menu to match keys and values required', () => {
     const menu = mapMenu({
-      open_in_new_tab: false,
-      logo_text: 'Landing Page',
       logo_link: '#home',
-      menu: [
+      logo_text: 'Logo',
+      logo: {
+        data: {
+          attributes: {
+            name: 'a.svg',
+            alternativeText: 'teste',
+            url: 'a.svg',
+          },
+        },
+      },
+      menu_links: [
         {
+          link_text: 'intro',
+          url: '#intro',
           open_in_new_tab: false,
-          link_text: 'pricing',
-          url: '#pricing',
         },
         {
+          link_text: 'grid-one',
+          url: '#grid-one',
           open_in_new_tab: false,
-          link_text: 'contact',
-          url: '#contact',
         },
       ],
-      logo: {
-        url: 'a.svg',
-      },
     });
 
     expect(menu.newTab).toBe(false);
-    expect(menu.text).toBe('Landing Page');
+    expect(menu.text).toBe('Logo');
     expect(menu.srcImg).toBe('a.svg');
     expect(menu.link).toBe('#home');
     expect(menu.links[0].newTab).toBe(false);
-    expect(menu.links[0].children).toBe('pricing');
-    expect(menu.links[0].link).toBe('#pricing');
+    expect(menu.links[0].children).toBe('intro');
+    expect(menu.links[0].link).toBe('#intro');
   });
 
   it('should return an empty array if no links', () => {

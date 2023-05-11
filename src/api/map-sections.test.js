@@ -8,7 +8,7 @@ describe('map-sections', () => {
   });
 
   it('should render sections with correct data', () => {
-    const data = mapSections(pageFakeData[0].sections);
+    const data = mapSections(pageFakeData[0].attributes.sections);
     expect(data[0].component).toBe('section.section-two-columns');
   });
 
@@ -38,24 +38,28 @@ describe('map-sections', () => {
     expect(data.title).toBe('');
   });
 
-  it('should map section two columns', () => {
+  it('should map section two columns with data', () => {
     const data = mapSectionTwoColumns({
       __component: 'section.section-two-columns',
-      _id: '602fdf2d540c00269e056178',
       title: 'title',
       description: 'abc',
-      metadata: {
-        background: true,
-        name: 'contact',
-        section_id: 'contact',
-      },
       image: {
-        url: 'a.svg',
+        data: {
+          attributes: {
+            alternativeText: null,
+            url: 'a.svg',
+          },
+        },
+      },
+      metadata: {
+        name: 'home',
+        section_id: 'home',
+        background: true,
       },
     });
     expect(data.background).toBe(true);
     expect(data.component).toBe('section.section-two-columns');
-    expect(data.sectionId).toBe('contact');
+    expect(data.sectionId).toBe('home');
     expect(data.srcImage).toBe('a.svg');
     expect(data.text).toBe('abc');
     expect(data.title).toBe('title');
@@ -139,32 +143,41 @@ describe('map-sections', () => {
   it('should map grid image with data', () => {
     const data = mapImageGrid({
       __component: 'section.section-grid',
+      title: 'GALLERY',
       description: 'abc',
-      title: 'Gallery',
+      metadata: {
+        name: 'gallery',
+        section_id: 'gallery-one',
+        background: false,
+      },
       text_grid: [],
       image_grid: [
         {
           image: {
-            alternativeText: 'abc',
-            url: 'a.svg',
+            data: [
+              {
+                attributes: {
+                  name: 'photo-1596918638939-cf4d365b6e03.jpg',
+                  alternativeText: 'abc',
+                  url: 'a.svg',
+                },
+              },
+              {
+                attributes: {
+                  name: 'photo-1610725424565-e12038af85a8.jpg',
+                  alternativeText: 'carro',
+                  url: 'https://res.cloudinary.com/dfrbl33eq/image/upload/v1683563522/photo_1610725424565_e12038af85a8_544ce1b22f.jpg',
+                },
+              },
+            ],
           },
         },
       ],
-      metadata: {
-        background: false,
-        _id: '602fdf2e540c00269e0561a4',
-        name: 'gallery',
-        section_id: 'gallery',
-        __v: 0,
-        id: '602fdf2e540c00269e0561a4',
-      },
-      __v: 2,
-      id: '602fdf2d540c00269e056175',
     });
     expect(data.background).toBe(false);
     expect(data.component).toBe('section.section-grid-image');
-    expect(data.sectionId).toBe('gallery');
-    expect(data.title).toBe('Gallery');
+    expect(data.sectionId).toBe('gallery-one');
+    expect(data.title).toBe('GALLERY');
     expect(data.description).toBe('abc');
     expect(data.grid[0].srcImg).toBe('a.svg');
     expect(data.grid[0].altText).toBe('abc');
